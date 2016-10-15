@@ -1,0 +1,117 @@
+#FOREWORD:
+    ## Thanks for using my program. I wrote it in 2 months in my free time at my undergrad. 
+    ## It's in stasis / "when I feel like it" until I graduate, but then I want to really develop it an make it a contender in the python world. 
+    ## There are some flow control issues I need to work out. Expect bugs for now. 
+
+#DESCRIPTION:
+    ## From scratch, a piano tone generator that will try to randomly output nice-sounding music.
+
+# PARAMETERS:
+    ## No launch parameters, just run it. Works on linux, 
+    ## Script stubbornly uses Linux commands. Fuck Microsoft!
+    
+#PERSONAL THOUGHTS:
+    ## It's a little like an elevator music generator. Nothing special, but nothing to shake a stick at.
+
+#FUTURE PLANS:
+    ## Implement a Whitelist (tend to favor these intervals, based on current note)
+    ## Implement a Blacklist (always remove these intervals, based on jump from current note)
+    ## Implement a GUI
+    ## Implement 16 common note rhythms that are associated with different styles of music. 
+    ## Combine note rhythms, and certain scales to create a real, original implementation of 
+    ## Implement a Counterpoint Algorithm
+    ## Implement a "Feed me midi files" which crunches 2-part piano music files, and finds correlations on a large scale
+    ## Let users edit individual notes
+    ## A "Thoughtless" mode, where the song plays 16 measures of a random key, and switches keys by taking advantage of a cadence, and plays forever. Something like
+    ## Buy a houseboat.
+
+# Program Specifications 
+# PIMUSICGEN v0.10.16:
+    
+    ## DIRECTIONS:
+        [1]Start new random rong
+            ## You must specify:
+                1. A Seed number, which is an INTEGER, which determines what "random" event happens. 
+                2. Key Tonic, which is simply a root note. Ex Ab, F#, D, and will determine where your song is rooted in the 12-tone scale. 
+                3. Choice of Scale: 
+                    3.1. Major Scale
+                    3.2. Natural Minor Scale
+                    3.3. Harmonic Minor Scale
+                    3.4. Melodic Minor Scale
+                    3.5. Dorian Mode
+                    3.6. Mixolydian Mode
+                    3.7. Ahava Raba Mode
+                    3.8. Minor pentatonic
+                    3.9. Pentatonic scale
+                4. Number of measures in your song, INTEGER
+                    This is how many "Times" you can say "Y" to a measure in the song. Once the song is full (up to your Measure number) it will redirect to the "Review" menu. 
+                5. Number of beats per measure, INTEGER
+                
+            A measure will play. Accept it with 'Y' or reject it with 'N'. 
+            Kept measures will be kept track of, and you can play back, remove or add new measures at any time, upon "Reviewing" it. 
+            Program may already have this feature, and I probably need to pretty up this part of the manual. 
+            
+        [2]Load exising song from file
+            ## You must specify:
+                1. A filename, a STRING which will reference a previously-saved file, located in the local ./SONGS folder. Example: SONG4132.bpd
+            ## FYI:
+                ##Saved files are named YOURFILENAME_SEED, to avoid overwriting your old saved files.
+                ##Save folder parameters are changable in the code. However, it makes a SONGS directory for you if it doesn't exist :-)
+                ##Because file strucure contains song metadata, you can create new measures after loading the song. 
+
+        [3]Demo mode
+            Demo mode will:
+                Specify for you:
+                    Seed Number: (random(0,9001))
+                    Key Tonic: 'C'
+                    Scale: 1 (major Scale)
+                    Measures: 8
+                    Beats per measure: 4
+                Under demo mode, you can still create songs, but they will all be in a standard format.     
+
+        [0]Quit
+            Quits the program. You will lose any unsaved data.         
+        
+#Misc / FAQ: 
+
+    ## How is the file saved? How can I retrieve it?
+        ~The song stores the format in serialized pickle format. 
+            ~Save file structure: (For anyone wondering how I save songs)
+                ~1. [KeyInfoDict] pickle-dumped to the save file first. 
+                ~2. [OurSong] pickle-dumped to the save file last. 
+                    ~[OurSong] is a 2-array, zipped, array of tuples, which have
+                        ~1. A note value (Integer)
+                        ~2. A sleep value (float)
+
+    ## Can I please get the option to ourput an MP3 or WAV file?
+        ~Very soon, yes. 
+
+    ## Can I export in MIDI format?
+        ~Very soon, yes.
+
+    ## Can I please get a GUI with notes, and the ability to edit song metadata in the middle of the song?
+        ~In a reasonable amount of time, yes ;)
+
+    ## Can you implement a genetic learning algorithm with perfect counterpoint?
+        ~Pay for me to go to grad school, and we'll talk in 2 years. 
+
+    ## Why do some scales sound terrible?
+        ~(in my snarky voice)
+        ~"Keep measure(Y/N)"
+        ~It's not perfect. Use the keep / remove measure features to remove things you do not like. 
+
+    ## Can I edit the notes individually?
+        ~Not for a while. 
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
