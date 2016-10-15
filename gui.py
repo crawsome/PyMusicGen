@@ -1,6 +1,8 @@
 import sys
 from PyQt4 import QtGui
 
+#WIP
+
 class Window(QtGui.QMainWindow):
 
     def __init__(self):

@@ -46,7 +46,7 @@ def review(KeyInfoDict,ourSong):
 			continue
         elif opt==0:
 			inMenu=0
-			return
+			quit()
 		
 def IntelligentPlay(KeyInfoDict,ourSong):
     ourTimes = []
