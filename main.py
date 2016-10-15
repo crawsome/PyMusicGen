@@ -48,7 +48,7 @@ def __main():
         if(isRandom):
             masterRand = random.randint(0,9001)
             random.seed(masterRand)
-        ourMeasures = 8
+        ourMeasures = 4
         #ourKey = random.choice(getNoteName(random.randint(0,11)))
         ourKey = 'Eb'
         #ourOption = random.randint(1,9)

@@ -57,6 +57,7 @@ def IntelligentPlay(KeyInfoDict,ourSong):
     i=0
     while (i < measureCount):
         for measures in range(0,measureCount):
+            i+=1
             ourTimes = makeRandomTimes(ourTimes,KeyInfoDict["beatsPerMeasure"])
             ourNotes = makeRandomNotes(ourScale,ourNotes,ourTimes)
             print('-----MEASURE %d START-----\n'%(i))
@@ -70,7 +71,7 @@ def IntelligentPlay(KeyInfoDict,ourSong):
             elif keep=="Y" or keep == "y":
                 if(measures == measureCount):
                     print "All measures are filled. Song is ready."
-                    review(KeyInfoDict,ourSong)
+                    break
                     ourTimes = []
                     ourNotes = []
                 else:
@@ -78,19 +79,18 @@ def IntelligentPlay(KeyInfoDict,ourSong):
                     ourTimes = []
                     ourNotes = []
             elif keep =="N" or keep =="n":
-                loopOffset+=1
                 if i>0: 
                     i-=1
                 ourTimes = []
                 ourNotes = []
                 continue
             elif keep =="R" or keep =="r":
-                loopOffset+=1
                 if i>0:
                     i-=1
                 ourTimes = []
                 ourNotes = []
                 review(KeyInfoDict,ourSong)
                 continue
-            i+=1
+		#this is a catch-all in case the song tries to exit prematurely. 
+        review(KeyInfoDict,ourSong)
        
