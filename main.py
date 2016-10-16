@@ -12,12 +12,9 @@ from algo import IntelligentPlay, review
 from playback import playNote, playChordIntList, playNoteFile, playChordFileList, playSongFile
 from helpingmethods import getNoteName, getBaseInt_ToneName, getOffset_ToneName, getOffset_ToneInt, getIntToneName, getRangeCount, getToneNameInt, rotate, floatEqual
 
-
-ourKeyNotes = []
-verbose = 1
-
 def __main():
     print("Welcome to Colin Burke's music program\n")
+    print("Please donate to the ESU Computer Science Organization if you liked this program.\n")
     print("Main Menu")
     masterRand = 0
     demo = 0
@@ -29,7 +26,7 @@ def __main():
             isRandom = 1
             break
         if menuOption==2: 
-            filePath = "./SONGS/" + raw_input("What is the ./ or full path to the file?")
+            filePath = "./SONGS/" + raw_input("./SONGS/")
             ourPickle = open(filePath, "rb")
             songParts = pickle.load(ourPickle)
             KeyInfoDict = songParts[0]
@@ -45,9 +42,6 @@ def __main():
             quit()
             
     if demo:
-        if(isRandom):
-            masterRand = random.randint(0,9001)
-            random.seed(masterRand)
         ourMeasures = 4
         #ourKey = random.choice(getNoteName(random.randint(0,11)))
         ourKey = 'Eb'
@@ -55,14 +49,16 @@ def __main():
         ourOption = 1
         beatsPerMeasure = 4
         ourScale = []
-        KeyInfoDict = {"ourMeasures":ourMeasures,"ourKey":ourKey,"ourOption":ourOption,"beatsPerMeasure":beatsPerMeasure,"masterRand":masterRand,"ourScale":ourScale}
+        ourSeeds = []
+        KeyInfoDict = {"ourMeasures":ourMeasures,"ourKey":ourKey,"ourOption":ourOption,"beatsPerMeasure":beatsPerMeasure,"ourScale":ourScale,"ourSeeds":ourSeeds}
     else:
-        random.seed(raw_input("\nPlease input Seed number "))
-        ourKey = raw_input("\nWhat Key Root? Ex Ab\n")
+        ourKey = raw_input("\nWhat Key Root? Accepable values: C,Db,D,Eb,E,F,F#,G,Ab,A,Bb,B \n")
         ourOption = input("\nPLEASE CHOOSE:\n--------------\n1. Major Scale\n2. Natural Minor Scale\n3. Harmonic Minor Scale\n4. Melodic Minor Scale\n5. Dorian Mode\n6. Mixolydian Mode\n7. Ahava Raba Mode\n8. Minor pentatonicn\9. Pentatonic scale\nYourChoice: ")
-        ourMeasures = input("\nHow many measures?")
         beatsPerMeasure = input("\nHow many beats per measure?")
-        KeyInfoDict = {"ourMeasures":ourMeasures,"ourKey":ourKey,"ourOption":ourOption,"beatsPerMeasure":beatsPerMeasure,"masterRand":masterRand}
+        ourMeasures = input("\nHow many measures?")
+        ourScale = []
+        ourSeeds = []
+        KeyInfoDict = {"ourMeasures":ourMeasures,"ourKey":ourKey,"ourOption":ourOption,"beatsPerMeasure":beatsPerMeasure,"ourScale":ourScale,"ourSeeds":ourSeeds}
     #Make our scale with our information
     KeyInfoDict["ourScale"] = makeScale(ourKey,ourOption)
     IntelligentPlay(KeyInfoDict,ourSong)

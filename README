@@ -1,25 +1,31 @@
-#FOREWORD:
+# FOREWORD:
     ## Thanks for using my program. I wrote it in 2 months in my free time at my undergrad. 
     ## It's in stasis / "when I feel like it" until I graduate, but then I want to really develop it an make it a contender in the python world. 
     ## There are some flow control issues I need to work out. Expect bugs for now. 
 
-#DESCRIPTION:
+# KNOWN ISSUES:
+    ## The program does not properly track the seed history through each measure.
+
+# DESCRIPTION:
     ## From scratch, a piano tone generator that will try to randomly output nice-sounding music.
+        # In detail:
+            # Takes a seed S, a key K, a key augemtation A, measures/song N, and beats/measure M, and creates a measure of music.
+            # The number of notes played per measure will be random every different seed. 
+            # are given a sleep time (literally, os.sleep()) which is in FP format, and fills up each of the N measures with sum( 
 
 # PARAMETERS:
-    ## No launch parameters, just run it. Works on linux, 
-    ## Script stubbornly uses Linux commands. Fuck Microsoft!
+    ## No launch parameters, just run it. Works on linux. Will make platform-independent soon. 
     
-#PERSONAL THOUGHTS:
+# PERSONAL THOUGHTS:
     ## It's a little like an elevator music generator. Nothing special, but nothing to shake a stick at.
 
-#FUTURE PLANS:
+# FUTURE PLANS:
     ## Implement a Whitelist (tend to favor these intervals, based on current note)
     ## Implement a Blacklist (always remove these intervals, based on jump from current note)
     ## Implement a GUI
     ## Implement 16 common note rhythms that are associated with different styles of music. 
     ## Combine note rhythms, and certain scales to create a real, original implementation of 
-    ## Implement a Counterpoint Algorithm
+    ## Implement a reasonable counterpoint Algorithm that can deviate only for accents, trills, etc. 
     ## Implement a "Feed me midi files" which crunches 2-part piano music files, and finds correlations on a large scale
     ## Let users edit individual notes
     ## A "Thoughtless" mode, where the song plays 16 measures of a random key, and switches keys.
@@ -28,7 +34,7 @@
 # PIMUSICGEN v0.10.16:
     
     ## DIRECTIONS:
-	run <python main.py>
+	run python main.py
         [1]Start new random rong
             ## You must specify:
                 1. A Seed number, which is an INTEGER, which determines what "random" event happens. 
@@ -43,9 +49,9 @@
                     3.7. Ahava Raba Mode
                     3.8. Minor pentatonic
                     3.9. Pentatonic scale
-                4. Number of measures in your song, INTEGER
-                    This is how many "Times" you can say "Y" to a measure in the song. Once the song is full (up to your Measure number) it will redirect to the "Review" menu. 
-                5. Number of beats per measure, INTEGER
+                4. Number of beats per measure, INTEGER
+                5. Number of measures in your song, INTEGER
+                    This is how many "Times" you can say "Y" to a measure in the song. Once the song is "full" as in, up to your Measure number, it will redirect to the "Review" menu. 
                 
             A measure will play. Accept it with 'Y' or reject it with 'N'. 
             Kept measures will be kept track of, and you can play back, remove or add new measures at any time, upon "Reviewing" it. 
@@ -55,9 +61,9 @@
             ## You must specify:
                 1. A filename, a STRING which will reference a previously-saved file, located in the local ./SONGS folder. Example: SONG4132.bpd
             ## FYI:
-                ##Saved files are named YOURFILENAME_SEED, to avoid overwriting your old saved files.
-                ##Save folder parameters are changable in the code. However, it makes a SONGS directory for you if it doesn't exist :-)
-                ##Because file strucure contains song metadata, you can create new measures after loading the song. 
+                ## Saved files are named YOURFILENAME_SEED, to avoid overwriting your old saved files.
+                ## Save folder parameters are changable in the code. However, it makes a SONGS directory for you if it doesn't exist :-)
+                ## Because file strucure contains song metadata, you can create new measures after loading the song. 
 
         [3]Demo mode
             Demo mode will:
@@ -72,7 +78,7 @@
         [0]Quit
             Quits the program. You will lose any unsaved data.         
         
-#Misc / FAQ: 
+# Misc / FAQ: 
 
     ## How is the file saved? How can I retrieve it?
         ~The song stores the format in serialized pickle format. 

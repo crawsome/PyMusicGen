@@ -4,8 +4,8 @@ from helpingmethods import getNoteName, getBaseInt_ToneName, getOffset_ToneName,
 
 # returns a scale of 16 notes, from the key tonic + 36
 def makeScale(keyRoot,keyOpt):
-    rangeJump = 36 # starting point on keyboard
-    lenVar = 16 # of notes we use 
+    rangeJump = 24 # starting point on keyboard
+    lenVar = 16 # of notes we use (2 octaves of key notes)
     ourOffset = getOffset_ToneName(keyRoot)
     keyString = getNoteName(abs(ourOffset))
     keyWheel = []
@@ -46,18 +46,17 @@ def makeScale(keyRoot,keyOpt):
 
 ## Make rhythms that are associated with a genre
 ## Each choice is 4 beats long, and will repeat through a 
-## measure if the beats-per-measure is large enougj
+## Measure if the beats-per-measure is large enough
 def makeTimes(type):
     if  1  == type:
         times = [1.5,1.0,.50,.50,.50]
 
-#randomly fills an empty array with sleep values, which represent note holds
+# Randomly fills an empty array with sleep values, which represent note holds
+# If you want to make your own arrays, just know:
+	#	0.1    0.5	  0.25    0.1666	0.0 
+	# 	W      H      Q       8       	Chord with next note
 def makeRandomTimes(ourTimes,beatsPerMeasure):
-    #times = [0.0,0.0,0.0,.25,.25,.50,.50,1.0,1.0]
-    #times = [.5,.5,0.0,0.0]
     times = [0.0,0.0,.25,.25,.5,.5,1.0,1.0]
-    times = [0.0,0.0,.25,.25,.5,.5,1.0,1.0]
-    #times = [0.0,0.0,.50,.50,.50,1.0,1.0,1.0]
     while abs(sum(ourTimes) - float(beatsPerMeasure))>.00001:
         nextTime = random.choice(times)
         ourTimes.append(nextTime)
@@ -80,7 +79,6 @@ def makeCounterPointNotes(ourScale,ourNotes,ourTimes):
 
 #fills an n=#sleeps array with notes from that scale that hopefully travel well. 
 def makeRandomNotes(ourScale,ourNotes,ourTimes):
-    ## insert root note first and foremost
     ourNotes = []
     for sleeps in ourTimes:
         nextJump = random.choice(ourScale)

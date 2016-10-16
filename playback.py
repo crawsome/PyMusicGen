@@ -29,11 +29,13 @@ def playChordFileList(fileNames,sleepTime):
         subprocess.Popen(['aplay','-q', 'wav/' + notes])
     sleep(sleepTime)
 
-def playSongFile(ourSong):
+def playSongFile(KeyInfoDict,ourSong):
     ourNotes = []
     ourTimes = []
-    for song in ourSong:
-        print song
-        ourNotes,ourTimes = zip(*song)
+    ourSeeds = KeyInfoDict["ourSeeds"]
+    for seed,measure in zip(ourSeeds,ourSong):
+        print ("Seed: %d"*(seed))
+        print measure
+        ourNotes,ourTimes = zip(*measure)
         for notes,times in zip(ourNotes,ourTimes):
             playNote(notes,times)
