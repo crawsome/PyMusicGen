@@ -84,6 +84,7 @@ def IntelligentPlay(KeyInfoDict,ourSong):
                     ourNotes = []
                     break
                 else:
+                    i+=1
                     ourSong.append(zip(ourNotes,ourTimes))
                     ourTimes = []
                     ourNotes = []
@@ -93,7 +94,7 @@ def IntelligentPlay(KeyInfoDict,ourSong):
                     ourTimes = []
                     ourNotes = []
                     continue
-            keep = raw_input("Q to quit, R to review song")
+            keep = raw_input("R to review song, Y to keep going")
             if keep =="R" or keep =="r":
                 if i>0:
                     i-=1
@@ -101,9 +102,9 @@ def IntelligentPlay(KeyInfoDict,ourSong):
                 ourNotes = []
                 review(KeyInfoDict,ourSong)
                 continue
-            elif keep == "Q" or keep == "q":
+            elif keep == "Y" or keep == "Y":
+                i+=1
                 break
 		#this is a catch-all in case the song tries to exit prematurely. 
-        i+=1
         review(KeyInfoDict,ourSong)
        
