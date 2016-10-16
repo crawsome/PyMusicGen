@@ -34,7 +34,7 @@ def playSongFile(KeyInfoDict,ourSong):
     ourTimes = []
     ourSeeds = KeyInfoDict["ourSeeds"]
     for seed,measure in zip(ourSeeds,ourSong):
-        print ("Seed: %d"*(seed))
+        print ("Seed: %d"%(seed))
         print measure
         ourNotes,ourTimes = zip(*measure)
         for notes,times in zip(ourNotes,ourTimes):

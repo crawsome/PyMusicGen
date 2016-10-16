@@ -2,7 +2,7 @@ import random
 from time import sleep
 from helpingmethods import getNoteName, getBaseInt_ToneName, getOffset_ToneName, getOffset_ToneInt, getIntToneName, getRangeCount, getToneNameInt, rotate, floatEqual
 
-# returns a scale of 16 notes, from the key tonic + 36
+# returns a scale of 16 notes, from the key tonic + 24
 def makeScale(keyRoot,keyOpt):
     rangeJump = 24 # starting point on keyboard
     lenVar = 16 # of notes we use (2 octaves of key notes)
@@ -53,8 +53,8 @@ def makeTimes(type):
 
 # Randomly fills an empty array with sleep values, which represent note holds
 # If you want to make your own arrays, just know:
-	#	0.1    0.5	  0.25    0.1666	0.0 
-	# 	W      H      Q       8       	Chord with next note
+	#	1.0    0.5	  0.25    0.1666	0.0 
+	# 	1/2    1/4    1/8     1/16      Plays with next note
 def makeRandomTimes(ourTimes,beatsPerMeasure):
     times = [0.0,0.0,.25,.25,.5,.5,1.0,1.0]
     while abs(sum(ourTimes) - float(beatsPerMeasure))>.00001:
