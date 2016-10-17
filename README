@@ -4,8 +4,8 @@
     ## There are some flow control issues I need to work out. Expect bugs for now. 
 
 # KNOWN ISSUES:
-    ## The program does not properly track the seed history through each measure.
-
+    ## I've been working on these as they come. Solved many issues. Please let me know if you find any!
+    
 # DESCRIPTION:
     ## From scratch, a piano tone generator that will try to randomly output nice-sounding music.
         # In detail:
@@ -31,7 +31,7 @@
     ## A "Thoughtless" mode, where the song plays 16 measures of a random key, and switches keys.
 
 # Program Specifications 
-# PIMUSICGEN v0.10.16:
+# PYMUSICGEN v0.10.16:
     
     ## DIRECTIONS:
 	run python main.py
