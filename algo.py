@@ -103,7 +103,6 @@ def IntelligentPlay(KeyInfoDict,ourSong):
                 review(KeyInfoDict,ourSong)
                 continue
             elif keep == "Y" or keep == "Y":
-                i+=1
                 break
 		#this is a catch-all in case the song tries to exit prematurely. 
         review(KeyInfoDict,ourSong)
