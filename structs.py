@@ -57,7 +57,7 @@ def makeTimes(type):
 	# 	1/2    1/4    1/8     1/16      Plays with next note
 def makeRandomTimes(ourTimes,beatsPerMeasure):
     times = [0.0,0.0,.25,.25,.5,.5,1.0,1.0]
-    while abs(sum(ourTimes) - float(beatsPerMeasure))>.00001:
+    while abs(sum(ourTimes) - float(beatsPerMeasure))>.001:
         nextTime = random.choice(times)
         ourTimes.append(nextTime)
         if abs(nextTime - ourTimes[-1]) < .01:
@@ -82,18 +82,19 @@ def makeRandomNotes(ourScale,ourNotes,ourTimes):
     ourNotes = []
     for sleeps in ourTimes:
         nextJump = random.choice(ourScale)
+        # If it's empty, add a random starting note. 
         try: 
-            #absJump = abs(nextJump-ourScale[ourNotes[-1]%12])
-            absJump = abs(nextJump-ourNotes[-1])
+            lastNote = ourNotes[-1]
+            absJump = abs(nextJump-lastNote)
         except IndexError:
             absJump = abs(nextJump)
         ourNotes.append(nextJump)
-        while (absJump==ourNotes[-1] or absJump>=10 or absJump==6 or ((absJump==2 or absJump==1) and sleep<=0.001)):
+        lastNote = ourNotes[-1]
+        while (absJump>=10 or absJump==6 or ((absJump==2 or absJump==1) and sleeps<=.001) and ((nextJump-absJump)==lastNote or (nextJump+absJump)==lastNote)):
             print "Avoided a(n) %s: "%(absJump)
             del ourNotes[-1]
             nextJump = random.choice(ourScale)
             try: 
-                #absJump = abs(nextJump-ourScale[ourNotes[-1]%12])
                 absJump = abs(nextJump-ourNotes[-1])
             except IndexError:
                 absJump = abs(nextJump%12)
