@@ -2,6 +2,9 @@ import random
 from time import sleep
 from helpingmethods import getNoteName, getBaseInt_ToneName, getOffset_ToneName, getOffset_ToneInt, getIntToneName, getRangeCount, getToneNameInt, rotate, floatEqual
 
+
+#this is a test comment
+
 # returns a scale of 16 notes, from the key tonic + 24
 def makeScale(keyRoot,keyOpt):
     rangeJump = 24 # starting point on keyboard
