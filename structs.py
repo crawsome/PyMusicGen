@@ -71,34 +71,60 @@ def makeRandomTimes(ourTimes,beatsPerMeasure):
             continue
     return ourTimes
     #You can specify a special rhythm here
-    #return [0.0,.5,0.0,.166666,0.0,.166666,.166666,0.0,.5,.25,0.0,.25]
-    #return [0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,]
+
 
 def makeCounterPointNotes(ourScale,ourNotes,ourTimes):    
     return ourNotes
 
-#fills an n=#sleeps array with notes from that scale that hopefully travel well. 
+# This method is ready for verbose, just take off the comments, and it 
+# will display what intervals fail and which ones succeed. 
+
+# Fills an n=#sleeps array with notes from that scale that hopefully 
+# travel well. 
 def makeRandomNotes(ourScale,ourNotes,ourTimes):
     ourNotes = []
     for sleeps in ourTimes:
-        nextJump = random.choice(ourScale)
-        # If it's empty, add a random starting note. 
-        try: 
-            lastNote = ourNotes[-1]
-            absJump = abs(nextJump-lastNote)
-        except IndexError:
-            absJump = abs(nextJump)
-        ourNotes.append(nextJump)
-        lastNote = ourNotes[-1]
-        while (absJump>=10 or absJump==6 or ((absJump==2 or absJump==1) and sleeps<=.001) and ((nextJump-absJump)==lastNote or (nextJump+absJump)==lastNote)):
-            print "Avoided a(n) %s: "%(absJump)
-            del ourNotes[-1]
-            nextJump = random.choice(ourScale)
-            try: 
-                absJump = abs(nextJump-ourNotes[-1])
-            except IndexError:
-                absJump = abs(nextJump%12)
-            ourNotes.append(nextJump)
-            if not ourScale[0] in ourNotes:
-                ourNotes.append(ourScale[0])
+		going = 1
+		while(going):
+			#Add something to it if it's empty
+			if not ourNotes:
+				ourNotes.append(random.choice(ourScale))
+			lastNote = ourNotes[-1]
+			#foo = raw_input("our last note was %s"%lastNote)
+			nextJump = random.choice(ourScale)
+			absJump = abs(nextJump-lastNote)
+			#foo = raw_input("our nextJump was %d"%(nextJump))
+			flip = 1
+			
+			#No jump higher than 10, no minor 5th"
+			if (absJump>=10 or absJump==6):
+				#print "%s was more than 10 or equal to 6"%(absJump)
+				#print ourNotes
+				nextJump = random.choice(ourScale)
+				absJump = abs(nextJump-lastNote)
+				flip = 0
+				#print "FAILED"	
+				
+			#not a minor second or second away at any time. 
+			elif (absJump==2 or absJump==1) and sleeps < 0.01:
+				#print "%s was a mashed note next to another"%(absJump)
+				#print ourNotes
+				nextJump = random.choice(ourScale)
+				absJump = abs(nextJump-lastNote)
+				#print "FAILED"	
+				flip = 0
+				
+			elif abs(absJump-lastNote == lastNote) and sleeps < 0.01:
+				#print "%s was the same as last note"%(absJump)
+				#print ourNotes
+				nextJump = random.choice(ourScale)
+				absJump = abs(nextJump-lastNote)
+				print "FAILED"	
+				flip = 0	
+				
+			if flip == 1:
+				print "SUCCESS WITH %s"%(nextJump)
+				ourNotes.append(nextJump)
+				print ourNotes
+				break
     return ourNotes
