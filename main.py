@@ -1,17 +1,8 @@
-import os
-import re
-import subprocess
-from time import sleep
-import random
-import struct
 import pickle
-import sys
 
-from structs import  makeRandomNotes, makeRandomTimes, makeScale
 from algo import IntelligentPlay, review
-from playback import playNote, playChordIntList, playNoteFile, playChordFileList, playSongFile
-from helpingmethods import getNoteName, getBaseInt_ToneName, getOffset_ToneName, getOffset_ToneInt, getIntToneName, \
-    getRangeCount, getToneNameInt, rotate, floatEqual
+from structs import makeScale
+
 
 def __main():
     print("Welcome to Colin Burke's music program\n")
@@ -22,47 +13,53 @@ def __main():
     inMenu = 1
     ourSong = []
     while inMenu:
-        menuOption = input(" [1]Start new random rong\n [2]Load exising song from file\n [3]Demo mode\n [0]Quit\n" \
+        menuOption = input(" [1]Start new random song\n [2]Load exising song from file\n [3]Demo mode\n [0]Quit\n" \
                            "Choice? ")
-        if menuOption==1:
+        if menuOption == 1:
             isRandom = 1
             break
-        if menuOption==2: 
+        if menuOption == 2:
             filePath = "./SONGS/" + raw_input("./SONGS/")
             ourPickle = open(filePath, "rb")
             songParts = pickle.load(ourPickle)
             KeyInfoDict = songParts[0]
             ourSong = songParts[1]
-            review(KeyInfoDict,ourSong)
+            review(KeyInfoDict, ourSong)
             continue
-        elif menuOption==3:
+        elif menuOption == 3:
             demo = 1
             isRandom = 1
             break
-        elif menuOption==0:
+        elif menuOption == 0:
             inMenu = 0
             quit()
-            
+
     if demo:
         ourMeasures = 4
-        #ourKey = random.choice(getNoteName(random.randint(0,11)))
+        # ourKey = random.choice(getNoteName(random.randint(0,11)))
         ourKey = 'Eb'
-        #ourOption = random.randint(1,9)
+        # ourOption = random.randint(1,9)
         ourOption = 1
         beatsPerMeasure = 4
         ourScale = []
         ourSeeds = []
-        KeyInfoDict = {"ourMeasures":ourMeasures,"ourKey":ourKey,"ourOption":ourOption,"beatsPerMeasure":beatsPerMeasure,"ourScale":ourScale,"ourSeeds":ourSeeds}
+        KeyInfoDict = {"ourMeasures": ourMeasures, "ourKey": ourKey, "ourOption": ourOption,
+                       "beatsPerMeasure": beatsPerMeasure, "ourScale": ourScale, "ourSeeds": ourSeeds}
     else:
         ourKey = raw_input("\nWhat Key Root? Accepable values: C,Db,D,Eb,E,F,F#,G,Ab,A,Bb,B \n")
-        ourOption = input("\nPLEASE CHOOSE:\n--------------\n1. Major Scale\n2. Natural Minor Scale\n3. Harmonic Minor Scale\n4. Melodic Minor Scale\n5. Dorian Mode\n6. Mixolydian Mode\n7. Ahava Raba Mode\n8. Minor pentatonicn\9. Pentatonic scale\nYourChoice: ")
+        ourOption = input(
+            "\nPLEASE CHOOSE:\n--------------\n1. Major Scale\n2. Natural Minor Scale\n3. Harmonic Minor Scale\n" \
+            "4. Melodic Minor Scale\n5. Dorian Mode\n6. Mixolydian Mode\n7. Ahava Raba Mode\n \
+            8. Minor pentatonicn\9. Pentatonic scale\nYourChoice: ")
         beatsPerMeasure = input("\nHow many beats per measure?")
         ourMeasures = input("\nHow many measures?")
         ourScale = []
         ourSeeds = []
-        KeyInfoDict = {"ourMeasures":ourMeasures,"ourKey":ourKey,"ourOption":ourOption,"beatsPerMeasure":beatsPerMeasure,"ourScale":ourScale,"ourSeeds":ourSeeds}
-    #Make our scale with our information
-    KeyInfoDict["ourScale"] = makeScale(ourKey,ourOption)
-    IntelligentPlay(KeyInfoDict,ourSong)
+        KeyInfoDict = {"ourMeasures": ourMeasures, "ourKey": ourKey, "ourOption": ourOption,
+                       "beatsPerMeasure": beatsPerMeasure, "ourScale": ourScale, "ourSeeds": ourSeeds}
+    # Make our scale with our information
+    KeyInfoDict["ourScale"] = makeScale(ourKey, ourOption)
+    IntelligentPlay(KeyInfoDict, ourSong)
+
 
 __main()
