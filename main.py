@@ -10,7 +10,8 @@ import sys
 from structs import  makeRandomNotes, makeRandomTimes, makeScale
 from algo import IntelligentPlay, review
 from playback import playNote, playChordIntList, playNoteFile, playChordFileList, playSongFile
-from helpingmethods import getNoteName, getBaseInt_ToneName, getOffset_ToneName, getOffset_ToneInt, getIntToneName, getRangeCount, getToneNameInt, rotate, floatEqual
+from helpingmethods import getNoteName, getBaseInt_ToneName, getOffset_ToneName, getOffset_ToneInt, getIntToneName, \
+    getRangeCount, getToneNameInt, rotate, floatEqual
 
 def __main():
     print("Welcome to Colin Burke's music program\n")
@@ -21,7 +22,8 @@ def __main():
     inMenu = 1
     ourSong = []
     while inMenu:
-        menuOption = input(" [1]Start new random rong\n [2]Load exising song from file\n [3]Demo mode\n [0]Quit\nChoice? ")
+        menuOption = input(" [1]Start new random rong\n [2]Load exising song from file\n [3]Demo mode\n [0]Quit\n" \
+                           "Choice? ")
         if menuOption==1:
             isRandom = 1
             break
