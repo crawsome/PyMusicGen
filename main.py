@@ -10,7 +10,7 @@ def __main():
     demo = 0
     inmenu = 1
     oursong = []
-    while inMenu:
+    while inmenu:
         menuoption = input(" [1]Start new random song\n [2]Load exising song from file\n [3]Demo mode\n [0]Quit\n" \
                            "Choice? ")
         if menuoption == 1:
