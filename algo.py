@@ -20,98 +20,94 @@ def savesong(keyinfodict, oursong):
 
 
 # gives user option to play, save, go back to random adding, or to remove the last measure from the song
-def review(KeyInfoDict, ourSong):
-    inMenu = 1
-    while inMenu:
+def review(keyinfodict, oursong):
+    inmenu = 1
+    while inmenu:
         opt = input(
-            " [1] Play song\n [2] Save as\n [3] Add new random measure\n [4] Remove last added measure from song\n [0] Quit\nChoice? ")
+            " [1] play song\n [2] save as\n [3] add new random measure\n [4] remove last added measure from song\n \
+            [0] quit\nchoice? "
+        )
         if opt == 1:
-            if (not ourSong):
-                print "You have to add measures to your song, first!"
+            if not oursong:
+                print "you have to add measures to your song, first!"
             else:
-                playSongFile(KeyInfoDict, ourSong)
+                playsongfile(keyinfodict, oursong)
             continue
         elif opt == 2:
-            if (not ourSong):
-                print "You have to add measures to your song, first!"
+            if not oursong:
+                print "you have to add measures to your song, first!"
             else:
-                saveSong(KeyInfoDict, ourSong)
+                savesong(keyinfodict, oursong)
             continue
         elif opt == 3:
-            nextSeed = input("Please enter next Measure's Seed")
-            KeyInfoDict["ourSeeds"].append(nextSeed)
-            random.seed(nextSeed)
+            nextseed = input("please enter next measure's seed")
+            keyinfodict["ourseeds"].append(nextseed)
+            random.seed(nextseed)
             # have them generated for you
-            # masterRand = random.randint(0,9001)
-            # KeyInfoDict["ourSeeds"].append(random.randint(0,9001))
+            # masterrand = random.randint(0,9001)
+            # keyinfodict["ourseeds"].append(random.randint(0,9001))
             return
         elif opt == 4:
             try:
-                del ourSong[-1]
+                del oursong[-1]
             except IndexError:
                 continue
             continue
         elif opt == 0:
-            inMenu = 0
+            inmenu = 0
             quit()
 
 
 # 2-octave range in the middle of the piano
-# With an array of a random quantity, or random rest times.
-# With an array of note values, which correspond the the quantity of rests. 
-# User will get the option to deny, or to accept the measure as it is
-def IntelligentPlay(KeyInfoDict, ourSong):
-    ourTimes = []
-    ourNotes = []
-    ourScale = KeyInfoDict["ourScale"]
-    measureCount = KeyInfoDict["ourMeasures"]
-    ourSeeds = KeyInfoDict["ourSeeds"]
-    loopOffset = 0
+# with an array of a random quantity, or random rest times.
+# with an array of note values, which correspond the the quantity of rests.
+# user will get the option to deny, or to accept the measure as it is
+def intelligentplay(keyinfodict, oursong):
+    ourtimes = []
+    ournotes = []
+    ourscale = keyinfodict["ourscale"]
+    measurecount = keyinfodict["ourmeasures"]
+    ourseeds = keyinfodict["ourseeds"]
     i = 0
-    while (i < measureCount):
-        for measures in range(0, measureCount):
-            nextSeed = input("Please enter next Measure's Seed")
-            random.seed(nextSeed)
-            KeyInfoDict["ourSeeds"].append(nextSeed)
-            ourTimes = makeRandomTimes(ourTimes, KeyInfoDict["beatsPerMeasure"])
-            ourNotes = makeRandomNotes(ourScale, ourNotes, ourTimes)
-            print('-----MEASURE %d START-----\n' % (i))
-            for notes, sleeps in zip(ourNotes, ourTimes):
-                print "Note: %s" % (getToneNameInt(notes))
-                print "Sleep Time: %f seconds\n" % (sleeps)
-                playNote(notes, sleeps)
-            keep = raw_input("Keep this measure? Y/N? \n")
+    while i < measurecount:
+        for measures in range(0, measurecount):
+            nextseed = input("please enter next measure's seed")
+            random.seed(nextseed)
+            keyinfodict["ourseeds"].append(nextseed)
+            ourtimes = makerandomtimes(ourtimes, keyinfodict["beatspermeasure"])
+            ournotes = makerandomnotes(ourscale, ournotes, ourtimes)
+            print('-----measure %d start-----\n' % i)
+            for notes, sleeps in zip(ournotes, ourtimes):
+                print "note: %s" % (gettonenameint(notes))
+                print "sleep time: %f seconds\n" % sleeps
+                playnote(notes, sleeps)
+            keep = raw_input("keep this measure? y/n? \n")
             if keep == "Y" or keep == "y":
-                if (i == measureCount):
-                    print "All measures are filled. Song is ready."
-                    ourTimes = []
-                    ourNotes = []
+                if i == measurecount:
+                    print "all measures are filled. song is ready."
+                    ourtimes = []
+                    ournotes = []
                     break
                 else:
                     i += 1
-                    ourSong.append(zip(ourNotes, ourTimes))
-                    ourTimes = []
-                    ourNotes = []
+                    oursong.append(zip(ournotes, ourtimes))
+                    ourtimes = []
+                    ournotes = []
             elif keep == "N" or keep == "n":
                 if i > 0:
                     i -= 1
-                    ourTimes = []
-                    ourNotes = []
+                    ourtimes = []
+                    ournotes = []
                     continue
-            keep = raw_input("R to review song, Y to keep going")
+            keep = raw_input("r to review song, y to keep going")
             if keep == "R" or keep == "r":
                 if i > 0:
                     i -= 1
-                ourTimes = []
-                ourNotes = []
-                review(KeyInfoDict, ourSong)
+                ourtimes = []
+                ournotes = []
+                review(keyinfodict, oursong)
                 continue
-            elif keep == "Y" or keep == "Y":
+            elif keep == "Y" or keep == "y":
                 break
                 # this is a catch-all in case the song tries to exit prematurely.
-        review(KeyInfoDict, ourSong)
-
-
-def clearArrays():
-    ourTimes = []
-    ourNotes = []
+        review(keyinfodict, oursong)
