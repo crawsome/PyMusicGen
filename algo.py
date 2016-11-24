@@ -2,20 +2,20 @@ import os
 import pickle
 import random
 
-from helpingmethods import getToneNameInt
-from playback import playNote, playSongFile
-from structs import makeRandomTimes, makeRandomNotes
+from helpingmethods import gettonenameint
+from playback import playnote, playsongfile
+from structs import makerandomtimes, makerandomnotes
 
 
 # saves song to file
-def saveSong(KeyInfoDict, ourSong):
-    fileName = raw_input("save as:")
-    saveFolder = "./SONGS/"
-    filePath = saveFolder + fileName
-    if not os.path.isdir(saveFolder):
-        os.makedirs(saveFolder)
-    with open(filePath, 'wb') as f:
-        pickle.dump([KeyInfoDict, ourSong], f, -1)
+def savesong(keyinfodict, oursong):
+    filename = raw_input("save as:")
+    savefolder = "./songs/"
+    filepath = savefolder + filename
+    if not os.path.isdir(savefolder):
+        os.makedirs(savefolder)
+    with open(filepath, 'wb') as f:
+        pickle.dump([keyinfodict, oursong], f, -1)
     return
 
 

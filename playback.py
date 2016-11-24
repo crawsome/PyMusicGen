@@ -1,48 +1,48 @@
 import os
 import subprocess
 from time import sleep
-from helpingmethods import getNoteName, getBaseInt_ToneName, getOffset_ToneName, getOffset_ToneInt, getIntToneName, \
-    getRangeCount, getToneNameInt, rotate, floatEqual
+from helpingmethods import getnotename, getbaseint_tonename, getoffset_tonename, getoffset_toneint, getinttonename, \
+    getrangecount, gettonenameint, rotate, floatequal
 
 
-# Plays a single note by integer value
-def playNote(noteInt, sleepTime):
-    # Make a list of all files in the directory
+# plays a single note by integer value
+def playnote(noteint, sleeptime):
+    # make a list of all files in the directory
     notes = next(os.walk("wav/"))[2]
     notes.sort()
-    subprocess.Popen(['aplay', '-q', 'wav/' + notes[noteInt]])
-    sleep(sleepTime)
+    subprocess.popen(['aplay', '-q', 'wav/' + notes[noteint]])
+    sleep(sleeptime)
 
 
-# Plays a whole chord by integer value
-def playChordIntList(noteIntList, sleepTime):
+# plays a whole chord by integer value
+def playchordintlist(noteintlist, sleeptime):
     notes = next(os.walk("wav/"))[2]
-    for ints in noteIntList:
-        subprocess.Popen(['aplay', '-q', 'wav/' + notes])
-    sleep(sleepTime)
+    for ints in noteintlist:
+        subprocess.popen(['aplay', '-q', 'wav/' + notes])
+    sleep(sleeptime)
 
 
-# Plays a single note by filename
-def playNoteFile(fileName, sleepTime):
-    subprocess.Popen(['aplay', '-q', 'wav/' + fileName])
-    sleep(sleepTime)
+# plays a single note by filename
+def playnotefile(filename, sleeptime):
+    subprocess.popen(['aplay', '-q', 'wav/' + filename])
+    sleep(sleeptime)
 
 
-# Plays a whole chord by filename
-def playChordFileList(fileNames, sleepTime):
-    for notes in fileNames:
-        subprocess.Popen(['aplay', '-q', 'wav/' + notes])
-    sleep(sleepTime)
+# plays a whole chord by filename
+def playchordfilelist(filenames, sleeptime):
+    for notes in filenames:
+        subprocess.popen(['aplay', '-q', 'wav/' + notes])
+    sleep(sleeptime)
 
 
-# Plays a song file
-def playSongFile(KeyInfoDict, ourSong):
-    ourNotes = []
-    ourTimes = []
-    ourSeeds = KeyInfoDict["ourSeeds"]
-    for seed, measure in zip(ourSeeds, ourSong):
-        print ("Seed: %d" % (seed))
+# plays a song file
+def playsongfile(keyinfodict, oursong):
+    ournotes = []
+    ourtimes = []
+    ourseeds = keyinfodict["ourseeds"]
+    for seed, measure in zip(ourseeds, oursong):
+        print ("seed: %d" % (seed))
         print measure
-        ourNotes, ourTimes = zip(*measure)
-        for notes, times in zip(ourNotes, ourTimes):
-            playNote(notes, times)
+        ournotes, ourtimes = zip(*measure)
+        for notes, times in zip(ournotes, ourtimes):
+            playnote(notes, times)
