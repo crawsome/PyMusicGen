@@ -33,7 +33,7 @@ def __main():
 
     if demo:
         ourmeasures = 4
-        ourkey = 'eb'
+        ourkey = 'Eb'
         ouroption = 1
         beatspermeasure = 8
         ourscale = []
