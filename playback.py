@@ -10,7 +10,7 @@ def playnote(noteint, sleeptime):
     # make a list of all files in the directory
     notes = next(os.walk("wav/"))[2]
     notes.sort()
-    subprocess.pOpen(['aplay', '-q', 'wav/' + notes[noteint]])
+    subprocess.Popen(['aplay', '-q', 'wav/' + notes[noteint]])
     sleep(sleeptime)
 
 
@@ -18,20 +18,20 @@ def playnote(noteint, sleeptime):
 def playchordintlist(noteintlist, sleeptime):
     notes = next(os.walk("wav/"))[2]
     for ints in noteintlist:
-        subprocess.pOpen(['aplay', '-q', 'wav/' + notes])
+        subprocess.Popen(['aplay', '-q', 'wav/' + notes])
     sleep(sleeptime)
 
 
 # plays a single note by filename
 def playnotefile(filename, sleeptime):
-    subprocess.pOpen(['aplay', '-q', 'wav/' + filename])
+    subprocess.Popen(['aplay', '-q', 'wav/' + filename])
     sleep(sleeptime)
 
 
 # plays a whole chord by filename
 def playchordfilelist(filenames, sleeptime):
     for notes in filenames:
-        subprocess.pOpen(['aplay', '-q', 'wav/' + notes])
+        subprocess.Popen(['aplay', '-q', 'wav/' + notes])
     sleep(sleeptime)
 
 
