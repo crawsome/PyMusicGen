@@ -1,9 +1,11 @@
 import os
 import subprocess
-import thread
+import random
 import sys
+import thread
 import winsound
 from time import sleep
+from multiprocessing import Pool
 
 
 # plays a single note by integer value
@@ -14,8 +16,10 @@ def playnote(noteint, sleeptime):
     if sys.platform in ('posix', 'linux'):
         subprocess.Popen(['aplay', '-q', 'wav/' + notes[noteint]])
     if sys.platform in ('win32', 'win64', 'windows'):
-        #thread.start_new_thread(winsound.PlaySound,("wav/" + notes[noteint], winsound.SND_FILENAME | winsound.SND_ASYNC))
-        winsound.PlaySound("wav/" + notes[noteint], winsound.SND_FILENAME | winsound.SND_ASYNC)
+        p = Pool(4)
+        p.map(winsound.PlaySound, ("wav/" + notes[noteint],winsound.SND_FILENAME | winsound.SND_ASYNC))
+        #thread.start_new_thread(winsound.PlaySound, ("wav/" + notes[noteint],winsound.SND_FILENAME | winsound.SND_ASYNC))
+        #winsound.PlaySound("wav/" + notes[noteint], winsound.SND_FILENAME | winsound.SND_ASYNC)
     sleep(sleeptime)
 
 
