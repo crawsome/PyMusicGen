@@ -1,5 +1,9 @@
-from structs import makescale, intelligentplay, review
+from structs \
+    import makescale, \
+    intelligentplay, \
+    review
 import pickle
+import sys
 
 def __main():
     print("Welcome to Colin Burke's music program\n")

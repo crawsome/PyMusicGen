@@ -235,4 +235,4 @@ def intelligentplay(keyinfodict, oursong):
             elif keep == "Y" or keep == "y":
                 break
                 # this is a catch-all in case the song tries to exit prematurely.
-        review(keyinfodict, oursong)
+    review(keyinfodict, oursong)
