@@ -24,8 +24,8 @@ def review(keyinfodict, oursong):
     inmenu = 1
     while inmenu:
         opt = input(
-            " [1] play song\n [2] save as\n [3] add new random measure\n [4] remove last added measure from song\n \
-            [0] quit\nchoice? "
+            " [1] play song\n [2] save as\n [3] add new random measure\n [4] remove last added measure from song\n "
+            "[0] quit\nchoice? "
         )
         if opt == 1:
             if not oursong:
