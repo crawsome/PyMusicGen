@@ -2,7 +2,8 @@ import os
 import subprocess
 import sys
 import thread
-import winsound
+if sys.platform in ('win32', 'win64', 'windows'):
+    import winsound
 from time import sleep
 
 
@@ -11,7 +12,7 @@ def playnote(noteint, sleeptime):
     # make a list of all files in the directory
     notes = next(os.walk("wav/"))[2]
     notes.sort()
-    if sys.platform in ('posix', 'linux'):
+    if sys.platform in ('posix', 'linux', 'linux2'):
         subprocess.Popen(['aplay', '-q', 'wav/' + notes[noteint]])
     if sys.platform in ('win32', 'win64', 'windows'):
         thread.start_new_thread(winsound.PlaySound, ("wav/" + notes[noteint],winsound.SND_FILENAME | winsound.SND_ASYNC))
