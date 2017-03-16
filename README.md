@@ -55,7 +55,7 @@ from Bash, navigate to the ./PyMusicGen directory, wherever you saved it, then e
 
 ## Main Menu:
 **Main menu options:**
- 1. [1]Start new random rong
+ 1. [1]Start new random song
  2. [2]Load exising song from file
  3. [3]Demo mode
  4. [0]Quit
