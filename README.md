@@ -10,7 +10,6 @@ If you liked this program, please consider the author (Colin Burke) for a job. H
 # Known Issues:
  * Program will deviate from keeping proper track of measure numbers after so many N decisions, but it will not affect your ability to fill up the song's # of measures. 
  * Program will prematurely exit, so I left a catch "Review" statement until I can figure out a better overarching flow control scheme.
- * Logic is broken right now, will have fixed by Nov 19. 
  
 # Description:
  * From scratch, a piano tone generator that will try to randomly output nice-sounding music.
