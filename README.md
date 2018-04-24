@@ -1,11 +1,9 @@
 # Foreword - PyMusicGen:
  * Thanks for using my program. I wrote it in 2 months in my free time at my undergrad. 
- * It's in stasis / "when I feel like it" until I graduate, but then I want to really develop it an make it a contender in the python world. 
- * There are some flow control issues I need to work out. Expect bugs for now. 
+ * Expect bugs for now. 
 
 # About the Author
-If you liked this program, please consider the author (Colin Burke) for a job. He's well-rounded in all areas of IT including programming, deployment, asset management, and infrastructure. He also just graduated from ESU with a double major in Computer Science and Computer Security. 
-   * https://www.linkedin.com/in/colingburke
+ * https://www.linkedin.com/in/colingburke
 
 # Known Issues:
  * Program will deviate from keeping proper track of measure numbers after so many N decisions, but it will not affect your ability to fill up the song's # of measures. 
@@ -15,7 +13,6 @@ If you liked this program, please consider the author (Colin Burke) for a job. H
  * From scratch, a piano tone generator that will try to randomly output nice-sounding music.
  * **Linux only for now**. Looking to make it platform-independent. 
  * Songs can be saved, loaded, or reproduced using the seeds. (You can write down some seeds, come back and get the same "Random" measure, without saving to disk)
- * A lot of effort was put into arbitrary-seeming logic in the makeRandomNotes() method. 
  
 # Personal thoughts:
  * It's a little like an elevator music generator. Nothing special, but nothing to shake a stick at.
@@ -59,7 +56,7 @@ from Bash, navigate to the ./PyMusicGen directory, wherever you saved it, then e
  3. [3]Demo mode
  4. [0]Quit
 
-  ### [1]. Start new random rong
+  ### [1]. Start new random song
   When you are starting a new song, you need to input a couple things. 
   
   1. **A Seed number**, (Int) which determines what "random" event happens. 
@@ -162,28 +159,7 @@ Quits the program
  		2. [OurSong] pickle-dumped to the save file last. 
 		3. [OurSong] is a 2-array, zipped, array of tuples, which have
 			1. A note value (Integer)
-            2. A sleep value (float)
-
- * Can I please get the option to ourput an MP3 or WAV file?
- 	* Very soon, yes. 
-
- * Can I export in MIDI format?
-  	* Very soon, yes.
-
- * Can I please get a GUI with notes, and the ability to edit song metadata in the middle of the song?
-  	* In a reasonable amount of time, yes ;)
-
- * Can you implement a genetic learning algorithm with perfect counterpoint?
-  	* Pay for me to go to grad school, and we'll talk in 2 years. 
-
- * Why do some scales sound terrible?
-   	* (in my snarky voice) You can use the "Keep measure(Y/N)" feature to remove measures.
-  	* It's not perfect. Use the keep / remove measure features to remove things you do not like. 
-
- * Can I edit the notes individually?
-	* Not for a while. :)
-
-
+            		2. A sleep value (float)
 
 
 
