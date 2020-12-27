@@ -105,36 +105,37 @@ def makerandomnotes(ourscale, notes, ourtimes):
 
             # no jump higher than 10, no minor 5th"
             if absjump >= 10 or absjump == 6:
-                # print "%s was more than 10 or equal to 6"%(absjump)
+                # print("%s was more than 10 or equal to 6"%(absjump))
                 nextjump = random.choice(ourscale)
                 absjump = abs(nextjump - lastnote)
                 flip = 0
 
                 # not a minor second or second away at any time.
             elif (absjump == 2 or absjump == 1) and sleeps < 0.01:
-                # print "%s was a mashed note next to another"%(absjump)
+                # print("%s was a mashed note next to another"%(absjump))
                 nextjump = random.choice(ourscale)
                 absjump = abs(nextjump - lastnote)
-                # print "failed"
+                # print("failed")
                 flip = 0
 
             elif abs(absjump - lastnote == lastnote) and sleeps < 0.01:
-                # print "%s was the same as last note"%(absjump)
+                # print("%s was the same as last note"%(absjump))
                 nextjump = random.choice(ourscale)
                 absjump = abs(nextjump - lastnote)
-                print "failed"
+                print("failed")
                 flip = 0
 
             if flip == 1:
-                print "success with %s" % (nextjump)
+                print("success with %s" % (nextjump))
                 notes.append(nextjump)
-                print notes
+                print(notes)
                 break
     return notes
 
+
 # saves song to file
 def savesong(keyinfodict, oursong):
-    filename = raw_input("save as:")
+    filename = str(input("save as:"))
     savefolder = "./songs/"
     filepath = savefolder + filename
     if not os.path.isdir(savefolder):
@@ -148,24 +149,21 @@ def savesong(keyinfodict, oursong):
 def review(keyinfodict, oursong):
     inmenu = 1
     while inmenu:
-        opt = input(
+        opt = int(input(
             " [1] play song\n [2] save as\n [3] add new random measure\n [4] remove last added measure from song\n "
-            "[0] quit\nchoice? "
-        )
+            "[0] quit\nchoice? "))
         if opt == 1:
             if not oursong:
-                print "you have to add measures to your song, first!"
+                print("you have to add measures to your song, first!")
             else:
                 playsongfile(keyinfodict, oursong)
-            continue
         elif opt == 2:
             if not oursong:
-                print "you have to add measures to your song, first!"
+                print("you have to add measures to your song, first!")
             else:
                 savesong(keyinfodict, oursong)
-            continue
         elif opt == 3:
-            nextseed = input("please enter next measure's seed")
+            nextseed = int(input("please enter next measure's seed (int)"))
             keyinfodict["ourseeds"].append(nextseed)
             random.seed(nextseed)
             # have them generated for you
@@ -176,8 +174,7 @@ def review(keyinfodict, oursong):
             try:
                 del oursong[-1]
             except IndexError:
-                continue
-            continue
+                pass
         elif opt == 0:
             inmenu = 0
             quit()
@@ -188,51 +185,43 @@ def review(keyinfodict, oursong):
 # with an array of note values, which correspond the the quantity of rests.
 # user will get the option to deny, or to accept the measure as it is
 def intelligentplay(keyinfodict, oursong):
-    ourtimes = []
-    ournotes = []
+
     ourscale = keyinfodict["ourscale"]
     measurecount = keyinfodict["ourmeasures"]
     ourseeds = keyinfodict["ourseeds"]
     i = 0
     while i < measurecount:
+        ourtimes = []
+        ournotes = []
         for measures in range(0, measurecount):
-            nextseed = input("please enter next measure's seed")
+            nextseed = int(input("please enter next measure's seed"))
             random.seed(nextseed)
             keyinfodict["ourseeds"].append(nextseed)
             ourtimes = makerandomtimes(ourtimes, keyinfodict["beatspermeasure"])
             ournotes = makerandomnotes(ourscale, ournotes, ourtimes)
             print('-----measure %d start-----\n' % i)
             for notes, sleeps in zip(ournotes, ourtimes):
-                print "note: %s" % (gettonenameint(notes))
-                print "sleep time: %f seconds\n" % sleeps
+                print("note: %s" % (gettonenameint(notes)))
+                print("sleep time: %f seconds\n" % sleeps)
                 playnote(notes, sleeps)
-            keep = raw_input("keep this measure? y/n? \n")
-            if keep == "Y" or keep == "y":
+            keep = str(input("keep this measure? y/n? \n"))
+            if keep.lower() == "y":
                 if i == measurecount:
-                    print "all measures are filled. song is ready."
-                    ourtimes = []
-                    ournotes = []
-                    break
+                    print("all measures are filled. song is ready.")
                 else:
                     i += 1
                     oursong.append(zip(ournotes, ourtimes))
-                    ourtimes = []
-                    ournotes = []
-            elif keep == "N" or keep == "n":
+            elif keep.lower() == "n":
                 if i > 0:
                     i -= 1
-                    ourtimes = []
-                    ournotes = []
-                    continue
-            keep = raw_input("r to review song, y to keep going")
-            if keep == "R" or keep == "r":
+
+            keep = str(input("r to review song, y to keep going"))
+            if keep.lower() == "r":
                 if i > 0:
                     i -= 1
-                ourtimes = []
-                ournotes = []
                 review(keyinfodict, oursong)
-                continue
-            elif keep == "Y" or keep == "y":
+            elif keep.lower() == "y":
                 break
                 # this is a catch-all in case the song tries to exit prematurely.
+
     review(keyinfodict, oursong)
