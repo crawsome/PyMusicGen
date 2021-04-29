@@ -1,3 +1,8 @@
+# Update 
+https://github.com/crawsome/PyMusicGen2
+
+Deprecating this repo soon. 
+
 # Foreword - PyMusicGen:
  * Thanks for using my program. I wrote it in 2 months in my free time at my undergrad. 
  * Expect bugs for now. 
